@@ -56,18 +56,38 @@ callback : function (error, res, done) {
           }, {});
 
         console.log(total, sorted_obj);
+        console.log(res.options.index);
+        console.log(res.options.maxIndex);
+        if(res.options.index + 1 == res.options.maxIndex){
+          fs.writeFile('result.txt', JSON.stringify(sorted_obj), 'utf8', function(err){
+            console.log('done');
+          });
+        }
 
     }
     done();
 }
 });
 
+var maxCount = 0;
 // iterate authorChannelId_list for url creation
 for (j=0; j<len_list; j++) {
+  var authorChannelId = authorChannelId_list[j];
+  if (authorChannelId.length>0){
+    maxCount += 1;
+  }
+}
+var index = -1;
+for (j=0; j<len_list; j++){
   var authorChannelId = authorChannelId_list.shift();
   console.log(authorChannelId_list.length);
   if (authorChannelId.length>0){
+    index += 1;
     var url = 'https://www.youtube.com/channel/' + authorChannelId + '/about'
-    c.queue(url);
+    c.queue({
+      uri: url,
+      index: index,
+      maxIndex: maxCount
+    });
   }
 }
