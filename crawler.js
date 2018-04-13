@@ -5,6 +5,7 @@ var fs = require('fs')
 var Math = require('math')
 authorChannelId_list = fs.readFileSync('./UCV0qA-eDDICsRR9rPcnG7tw_authorChannelId.txt', 'UTF8').split(/\r?\n/);
 const len_list = authorChannelId_list.length
+var channelId = "hihi"
 var dict = {}
 var dict_Ratio = {}
 
@@ -59,7 +60,8 @@ callback : function (error, res, done) {
         console.log(res.options.index);
         console.log(res.options.maxIndex);
         if(res.options.index + 1 == res.options.maxIndex){
-          fs.writeFile('result.txt', JSON.stringify(sorted_obj), 'utf8', function(err){
+          var filen = channelId + '_result.txt'
+          fs.writeFile(filen, JSON.stringify(sorted_obj), 'utf8', function(err){
             console.log('done');
           });
         }
