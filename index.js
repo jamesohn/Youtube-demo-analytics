@@ -9,10 +9,11 @@ const config = require('config'),
 
 // 'UCV0qA-eDDICsRR9rPcnG7tw','UC4xKdmAXFh4ACyhpiQ_3qBw',
 /* load channel-list from csv*/
-var channel_raw = ['UC5xK2Xdrud3-KGjkS1Igumg']
-var channel_list = []
-var videocomment = {}
-var commentAuthorChannelId_list = {}
+var channel_raw = ['UC5xK2Xdrud3-KGjkS1Igumg'],
+ channel_list = [],
+ videocomment = {},
+ commentAuthorChannelId_list = {}
+
 for(var channel of channel_raw){
   videocomment[channel] = []
   commentAuthorChannelId_list[channel] = []
