@@ -8,9 +8,9 @@ const config = require('config'),
   authorChannelId = require('./lib/youtube_authorChannelId_node.js'),
   crawler = require('./lib/crawler0.js')
 
-
+// 'UCV0qA-eDDICsRR9rPcnG7tw','UC4xKdmAXFh4ACyhpiQ_3qBw',
 /* load channel-list from csv*/
-var channel_raw = ['UCV0qA-eDDICsRR9rPcnG7tw','UC4xKdmAXFh4ACyhpiQ_3qBw','UC5xK2Xdrud3-KGjkS1Igumg']
+var channel_raw = ['UC5xK2Xdrud3-KGjkS1Igumg']
 var channel_list = []
 var videocomment = {}
 var commentAuthorChannelId_list = {}
@@ -45,9 +45,11 @@ const main = async (channel) => {
       if(commentAuthorChannelId_list[channel].length>200000){
         console.log('comment over 200,000');
         crawler.crawler(channel,commentAuthorChannelId_list[channel])
+        delete commentAuthorChannelId_list[channel]
       }
     }
     crawler.crawler(channel,commentAuthorChannelId_list[channel])
+    delete commentAuthorChannelId_list[channel]
   } catch (error){
     console.log(error)
   }
