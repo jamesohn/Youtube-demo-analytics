@@ -57,7 +57,7 @@ module.exports = {
               return acc;
               }, {});
 
-            console.log(total, sorted_obj);
+            console.log(total, sortable.slice(0,10));
             console.log(res.options.index);
             console.log(res.options.maxIndex);
             if(res.options.index + 1 == res.options.maxIndex){
