@@ -1,5 +1,4 @@
 /* load modules */
-// process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 const config = require('config'),
   fs = require('fs'),
   channelDetail = require('./lib/channel-detail.js'),
@@ -34,13 +33,14 @@ const main = async (channel) => {
     let { dir_name, video_list } = await videoList(channel, videoCount)
     console.log('Video List ' + channel + ' done')
 
+    /* videoDetail return { videoId:videoId, commentCount:commentCount } */
     for(const videoId of video_list){
       videocomment[channel].push(await videoDetail(dir_name, videoId))
       console.log(channel+' videocomment ' + videoId + ' done');
     }
+    /* authorchannelId return array of commenter's channelId for each videoId */
     for(const obj of videocomment[channel]){
       commentAuthorChannelId_list[channel] = commentAuthorChannelId_list[channel].concat(await authorChannelId(channel, obj.videoId, obj.commentCount))
-      // commentAuthorChannelId_list = await authorChannelId(channel, obj.videoId, obj.commentCount)
       console.log(channel +' '+ commentAuthorChannelId_list[channel].length);
       if(commentAuthorChannelId_list[channel].length>200000){
         console.log('comment over 200,000');
